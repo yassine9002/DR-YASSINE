@@ -22,22 +22,19 @@ jobs:
       - name: Find Flutter project
         run: |
           PUBSPEC=$(find android-project -name pubspec.yaml -type f | head -n 1)
-
-          if [ -z "$PUBSPEC" ]; then
-            echo "ERROR: pubspec.yaml not found"
-            find android-project -maxdepth 4 -type f | head -100
-            exit 1
-          fi
-
           PROJECT_DIR=$(dirname "$PUBSPEC")
-
-          echo "Flutter project: $PROJECT_DIR"
           echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
+          echo "Flutter project: $PROJECT_DIR"
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+
+      - name: Create Android platform
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: |
+          flutter create . --platforms=android
 
       - name: Get dependencies
         working-directory: ${{ env.PROJECT_DIR }}
