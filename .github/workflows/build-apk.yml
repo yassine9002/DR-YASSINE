@@ -17,7 +17,7 @@ jobs:
       - name: Extract Flutter project
         run: |
           mkdir android-project
-          unzip -q DR_YASSINE_Android_Prototype.zip -d android-project
+          unzip -q DR_YASSINE_Multilingual_AR_FR_EN_INSTAGRAM.zip -d android-project
 
       - name: Find Flutter project
         run: |
